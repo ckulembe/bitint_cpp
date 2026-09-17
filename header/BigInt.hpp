@@ -35,8 +35,6 @@ class   BigInt
                 std::string     sequence;
 };
 
-void                    handlerSequence( std::string& );
-bool                    isValid( const std::string& );
 std::ostream&           operator<<( std::ostream&, const BigInt& );
 
 #endif

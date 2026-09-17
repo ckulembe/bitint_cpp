@@ -6,6 +6,9 @@
 
 #include        "../header/BigInt.hpp"
 
+static bool    isValid( std::string& _sqc );
+static void    handlerSequence( std::string& _sqc );
+
 BigInt::BigInt( void )
         : sequence( std::string("0") )
 { /* empty body */ }
@@ -50,7 +53,7 @@ std::ostream&    operator<<( std::ostream& _out, const BigInt& _big )
         return _out;
 }
 
-bool    isValid( std::string& _sqc )
+static bool    isValid( std::string& _sqc )
 {
         std::size_t     i = 0;
         if ( _sqc[i] == 43 )
@@ -100,7 +103,9 @@ BigInt BigInt::operator+( const BigInt& _bigint ) const
                         rst = 0;
                 }
         }
-
+        if ( rst > 0 )
+                _stack.push( rst + '0' );
+                
         char    _c_st[ _stack.size() ];
         
         int     _stack_sz = static_cast<int>(_stack.size());
@@ -127,7 +132,7 @@ void    BigInt::setSequence( std::string _sqc )
         handlerSequence( this->sequence );
 }
 
-void    handlerSequence( std::string& _sqc )
+static void    handlerSequence( std::string& _sqc )
 {
         if ( _sqc.size() == 1 && std::isdigit(_sqc[ 0 ]) )
                 return ;

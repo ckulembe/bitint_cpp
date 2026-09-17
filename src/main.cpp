@@ -5,7 +5,7 @@
 
 int     main()
 {
-        const BigInt a(42);
+        const BigInt a(99);
         BigInt b(21), c, d(1337), e(d);
 
         std::cout << "a = " << a << std::endl;
