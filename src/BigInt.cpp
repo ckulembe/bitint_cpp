@@ -6,8 +6,10 @@
 
 #include        "../header/BigInt.hpp"
 
-static bool    isValid( std::string& _sqc );
-static void    handlerSequence( std::string& _sqc );
+static bool    isValid( std::string& );
+static void    handlerSequence( std::string& );
+static std::size_t      convert( const std::string& );
+
 
 BigInt::BigInt( void )
         : sequence( std::string("0") )
@@ -53,18 +55,6 @@ std::ostream&    operator<<( std::ostream& _out, const BigInt& _big )
         return _out;
 }
 
-static bool    isValid( std::string& _sqc )
-{
-        std::size_t     i = 0;
-        if ( _sqc[i] == 43 )
-                ++i;
-        while ( std::isdigit( _sqc[i] ) )
-                ++i;
-        if ( _sqc[i] != 0 && !std::isdigit(_sqc[i]) )
-                return false;
-        return true;
-}
-
 BigInt BigInt::operator+( const BigInt& _bigint ) const
 {
         int     rst = 0;
@@ -105,7 +95,7 @@ BigInt BigInt::operator+( const BigInt& _bigint ) const
         }
         if ( rst > 0 )
                 _stack.push( rst + '0' );
-                
+
         char    _c_st[ _stack.size() ];
         
         int     _stack_sz = static_cast<int>(_stack.size());
@@ -130,15 +120,6 @@ void    BigInt::setSequence( std::string _sqc )
                 ? this->sequence = "0"
                 : this->sequence = _sqc;
         handlerSequence( this->sequence );
-}
-
-static void    handlerSequence( std::string& _sqc )
-{
-        if ( _sqc.size() == 1 && std::isdigit(_sqc[ 0 ]) )
-                return ;
-        std::size_t      _index = _sqc.find( '+', 0 );
-        _index == std::string::npos ? _index = 0 : _index++;
-        _sqc = _sqc.substr( _index, _sqc.size());
 }
 
 bool    BigInt::operator>( const BigInt& _bigint ) const
@@ -306,6 +287,74 @@ BigInt BigInt::operator++( int )
         BigInt  _result = *this;
         ++(*this);
         return _result;
+}
+
+BigInt  BigInt::operator<<( const BigInt& _bigint ) const
+{
+        std::string     _sequence = this->sequence;
+        std::size_t n = convert( _bigint.sequence );
+        std::size_t i = 0;
+
+        while ( i < n )
+        {
+                _sequence = _sequence + "0";
+                i++;
+        }
+        BigInt  _bigintR( _sequence );
+        return _bigintR;
+}
+
+BigInt&  BigInt::operator<<=( const BigInt& _bigint )
+{
+        std::string     _sequence = this->sequence;
+        std::size_t n = convert( _bigint.sequence );
+        std::size_t i = 0;
+
+        while ( i < n )
+        {
+                _sequence = _sequence + "0";
+                i++;
+        }
+        this->sequence = _sequence;
+        return *this;
+}
+
+/* --------------------- static function -------------------- */
+
+static void    handlerSequence( std::string& _sqc )
+{
+        if ( _sqc.size() == 1 && std::isdigit(_sqc[ 0 ]) )
+                return ;
+        std::size_t      _index = _sqc.find( '+', 0 );
+        _index == std::string::npos ? _index = 0 : _index++;
+        _sqc = _sqc.substr( _index, _sqc.size());
+}
+
+static bool    isValid( std::string& _sqc )
+{
+        std::size_t     i = 0;
+        if ( _sqc[i] == 43 )
+                ++i;
+        while ( std::isdigit( _sqc[i] ) )
+                ++i;
+        if ( _sqc[i] != 0 && !std::isdigit(_sqc[i]) )
+                return false;
+        return true;
+}
+
+static std::size_t      convert( const std::string& _str )
+{
+        std::size_t     rst = 0;
+        std::size_t     _size = _str.size();
+        std::size_t     _index = 0;
+
+        while ( _index < _size )
+        {
+                rst = rst * 10 + ( _str[_index] - '0' );
+                ++_index;
+        }
+
+        return rst;
 }
 
 // std::string     compare( const std::string& _s1, const std::string& _s2 )
