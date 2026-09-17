@@ -62,7 +62,7 @@ bool    isValid( std::string& _sqc )
         return true;
 }
 
-BigInt BigInt::operator+( BigInt& _bigint )
+BigInt BigInt::operator+( const BigInt& _bigint ) const
 {
         int     rst = 0;
         std::stack<char>        _stack;
@@ -136,7 +136,7 @@ void    handlerSequence( std::string& _sqc )
         _sqc = _sqc.substr( _index, _sqc.size());
 }
 
-bool    BigInt::operator>( const BigInt& _bigint )
+bool    BigInt::operator>( const BigInt& _bigint ) const
 {
         std::string     _s1 = this->sequence;
         std::string     _s2 = _bigint.sequence;
@@ -163,7 +163,7 @@ bool    BigInt::operator>( const BigInt& _bigint )
         }
 }
 
-bool    BigInt::operator<( const BigInt& _bigint )
+bool    BigInt::operator<( const BigInt& _bigint ) const
 {
         std::string     _s1 = _bigint.sequence;
         std::string     _s2 = this->sequence;
@@ -190,7 +190,7 @@ bool    BigInt::operator<( const BigInt& _bigint )
         }
 }
 
-bool    BigInt::operator<=( const BigInt& _bigint )
+bool    BigInt::operator<=( const BigInt& _bigint ) const
 {
         std::string     _s1 = _bigint.sequence;
         std::string     _s2 = this->sequence;
@@ -217,7 +217,7 @@ bool    BigInt::operator<=( const BigInt& _bigint )
         }
 }
 
-bool    BigInt::operator>=( const BigInt& _bigint )
+bool    BigInt::operator>=( const BigInt& _bigint ) const
 {
         std::string     _s1 = this->sequence;
         std::string     _s2 = _bigint.sequence;
@@ -244,7 +244,7 @@ bool    BigInt::operator>=( const BigInt& _bigint )
         }
 }
 
-bool    BigInt::operator==( const BigInt& _bigint )
+bool    BigInt::operator==( const BigInt& _bigint ) const
 {
         std::string     _s1 = this->sequence;
         std::string     _s2 = _bigint.sequence;
@@ -263,7 +263,7 @@ bool    BigInt::operator==( const BigInt& _bigint )
                 return true;
         }
 }
-bool    BigInt::operator!=( const BigInt& _bigint )
+bool    BigInt::operator!=( const BigInt& _bigint ) const
 {
         std::string     _s1 = this->sequence;
         std::string     _s2 = _bigint.sequence;
@@ -281,6 +281,26 @@ bool    BigInt::operator!=( const BigInt& _bigint )
                         return true;
                 return false;
         }
+}
+
+BigInt& BigInt::operator+=( const BigInt& _bigint )
+{
+        this->sequence = this->operator+(_bigint).sequence;
+        return *this;
+}
+
+BigInt& BigInt::operator++( void )
+{
+        BigInt  _one( 1 );
+        *this = this->operator+(  _one );
+        return *this;
+}
+
+BigInt BigInt::operator++( int )
+{
+        BigInt  _result = *this;
+        ++(*this);
+        return _result;
 }
 
 // std::string     compare( const std::string& _s1, const std::string& _s2 )

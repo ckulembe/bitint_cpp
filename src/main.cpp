@@ -5,9 +5,8 @@
 
 int     main()
 {
-        const BigInt    a(42);
-        BigInt  b(2100), c(1), d("4000000000000000000000000000000000000000000000000000000"), e(d);
-        BigInt  f;
+        const BigInt a(42);
+        BigInt b(21), c, d(1337), e(d);
 
         std::cout << "a = " << a << std::endl;
         std::cout << "b = " << b << std::endl;
@@ -15,8 +14,25 @@ int     main()
         std::cout << "d = " << d << std::endl;
         std::cout << "e = " << e << std::endl;
 
-        f = d + b;
-        std::cout << "d + b = " << f << std::endl;
+        std::cout << std::endl;
+
+        std::cout << "a + b = " << a + b << std::endl;
+        std::cout << "(c += a) = " << (c += a) << std::endl;
+
+        std::cout << "b = " << b << std::endl;
+        std::cout << "++b = " << ++b << std::endl;
+        std::cout << "b++ = " << b++ << std::endl;
+
+        // std::cout << "(b << 10) + 42 = " << ((b << 10) + 42) << std::endl;
+        // std::cout << "(d <<= 4) = " << (d <<= 4) << std::endl;
+        // std::cout << "(d >>= 2) = " << (d >>= (const bigint)2) << std::endl;
+
+        std::cout << std::endl;
+
+        std::cout << "a = " << a << std::endl;
+        std::cout << "d = " << d << std::endl;
+
+        std::cout << std::endl;
 
         std::cout << "(d < a) = " << (d < a) << std::endl;
         std::cout << "(d <= a) = " << (d <= a) << std::endl;

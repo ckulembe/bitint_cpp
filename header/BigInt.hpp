@@ -9,8 +9,8 @@
 class   BigInt
 {
         public:
-                BigInt( void );
                 BigInt( int );
+                BigInt( void );
                 BigInt( const std::string& );
                 BigInt( const BigInt& );
                 BigInt& operator=( const BigInt& );
@@ -18,14 +18,18 @@ class   BigInt
                 const std::string       getSequence( void ) const;
                 void                    setSequence( std::string );
 
-                BigInt operator+( BigInt& );
+                BigInt operator+ ( const BigInt& ) const;
+                BigInt& operator+=( const BigInt& );
 
-                bool    operator>( const BigInt& );
-                bool    operator<( const BigInt& );
-                bool    operator<=( const BigInt& );
-                bool    operator>=( const BigInt& );
-                bool    operator==( const BigInt& );
-                bool    operator!=( const BigInt& );
+                BigInt& operator++( void );
+                BigInt  operator++( int );
+
+                bool    operator> ( const BigInt& ) const;
+                bool    operator< ( const BigInt& ) const;
+                bool    operator<=( const BigInt& ) const;
+                bool    operator>=( const BigInt& ) const;
+                bool    operator==( const BigInt& ) const;
+                bool    operator!=( const BigInt& ) const;
         
         private:
                 std::string     sequence;
