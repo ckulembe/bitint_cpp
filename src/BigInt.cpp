@@ -328,6 +328,16 @@ BigInt  BigInt::operator>>( const BigInt& _bigint ) const
         return _bigintR;
 }
 
+BigInt&  BigInt::operator>>=( const BigInt& _bigint )
+{
+        std::size_t     n = convert( _bigint.sequence );
+        BigInt  _bigintR;
+        if ( this->sequence.size() > n)
+                _bigintR.sequence = this->sequence.substr( 0, this->sequence.size() - n );
+        this->sequence = _bigintR.sequence;
+        return *this;
+}
+
 /* --------------------- static function -------------------- */
 
 static void    handlerSequence( std::string& _sqc )
