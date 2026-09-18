@@ -23,7 +23,7 @@ Essa abordagem permite tratar o número como se fosse um inteiro comum, mas sem 
 - Adição;
 - Incremento: pré-incremento e pós-incremento;
 - Comparação entre valores;
-- Operadores de deslocamento à esquerda;
+- Operadores de deslocamento à esquerda e à direita;
 - Operadores lógicos.
 
 ## Estrutura do projeto
