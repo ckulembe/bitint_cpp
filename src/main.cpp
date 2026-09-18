@@ -25,7 +25,7 @@ int     main()
 
         std::cout << "(b << 10) + 42 = " << ((b << 10) + 42) << std::endl;
         std::cout << "(d <<= 4) = " << (d <<= 4) << std::endl;
-        // std::cout << "(d >>= 2) = " << (d >>= (const bigint)2) << std::endl;
+        std::cout << "(d >> 2) = " << (d >> (const BigInt) 2) << std::endl;
 
         std::cout << std::endl;
 

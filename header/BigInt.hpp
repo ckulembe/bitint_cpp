@@ -25,7 +25,7 @@ class   BigInt
                 BigInt  operator++( int );
 
                 BigInt  operator<<( const BigInt& ) const;
-                // BigInt  operator>>( const BigInt& ) const;
+                BigInt  operator>>( const BigInt& ) const;
                 
                 BigInt&  operator<<=( const BigInt& );
                 // BigInt&  operator>>=( const BigInt& ) const;
